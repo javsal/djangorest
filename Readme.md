@@ -6,7 +6,7 @@ $ cd projects
 $ virtualenv -p /usr/bin/python3 venv
 $ source venv/bin/activate
 $ pip install Django
-$ git clone https://gitlab.com/shamim4063/djangorest.git
+$ git clone https://github.com/javsal/djangorest.git
 $ cd djangorest
 $ pip install djangorestframework
 $ python3 manage.py runserver
