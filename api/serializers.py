@@ -9,7 +9,7 @@ class DistrictListSerializer(serializers.ModelSerializer):
         read_only_fields=('date_created', 'date_modified')
 
 
-
+   
 class PlayerListSerializer(serializers.ModelSerializer):
     """Serializer to map the Model instance into JSON format."""
     home_district = DistrictListSerializer(required=False)
