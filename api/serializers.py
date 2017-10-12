@@ -12,7 +12,7 @@ class DistrictListSerializer(serializers.ModelSerializer):
    
 class PlayerListSerializer(serializers.ModelSerializer):
     """Serializer to map the Model instance into JSON format."""
-    home_district = DistrictListSerializer(required=False)
+    # home_district = DistrictListSerializer(required=False)
     class Meta:
         """Meta class to map serializer's fields with the model fields."""
         model = PlayerList
