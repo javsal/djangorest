@@ -65,3 +65,15 @@ def category_list(request):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['GET'])
+def product_filter(request, param):
+    """
+    List all code snippets, or create a new snippet.
+    """
+    print(param)
+    if request.method == 'GET':
+        # product = Product.objects.filter(name=param) # search on string field exect match
+        product = Product.objects.filter(name__iexact=param)
+        serializer = ProductSerializer(product, many=True)
+        return Response(serializer.data)
