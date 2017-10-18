@@ -8,7 +8,7 @@ class CategorySerializer(serializers.ModelSerializer):
         fields = ('id', 'name')
 
 class ProductSerializer(serializers.ModelSerializer):
-    category=CategorySerializer(required=False)
+    # category=CategorySerializer(required=False) # To view detail of foreign key feild
     class Meta:
         model = Product
         fields = ('id', 'name', 'price', 'uom', 'category')

@@ -5,6 +5,7 @@ from .views import product_list, product_detail, category_list
 urlpatterns = {
     url(r'^list/$', product_list),
     url(r'^list/(?P<pk>[0-9]+)/$', product_detail),
+    url(r'^list/(?P<pk>[0-9]+)/$', product_filter),
     url(r'^category/$', category_list),
 }
 
