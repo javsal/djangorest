@@ -66,6 +66,7 @@ def category_list(request):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+
 @api_view(['GET'])
 def product_filter(request, param):
     """
@@ -73,7 +74,10 @@ def product_filter(request, param):
     """
     print(param)
     if request.method == 'GET':
-        # product = Product.objects.filter(name=param) # search on string field exect match
-        product = Product.objects.filter(name__iexact=param)
+        product = Product.objects.filter(name=param) # search on string field exect match
+        # product = Product.objects.filter(name__iexact=param) # search on string field case insensetive match
+        # product=Product.objects.filter(name__contains=param) # Like Search on field
+        # product = Product.objects.filter(category__name=param) #Forign key feild match
+        product = Product.objects.filter(category__name__contains=param) #Forign key feild Like search
         serializer = ProductSerializer(product, many=True)
         return Response(serializer.data)
