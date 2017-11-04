@@ -1,10 +1,11 @@
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from django.db.models import Avg, Max, FloatField, Count
+from django.db.models import Avg, Max,Min, FloatField, Count
 
 from .models import Author, Publisher, Book, Store
-from .serializers import AuthorSerializer, PublisherSerializer, BookSerializer
+from .serializers import AuthorSerializer, PublisherSerializer, BookSerializer, StoreSerializer
+
 
 @api_view(['GET'])
 def agg_query(request):
@@ -16,6 +17,9 @@ def agg_query(request):
         # books = Book.objects.all().aggregate(Avg('price'))
         # books = Book.objects.all().aggregate(Max('price'))
         # books=Book.objects.aggregate(price_diff=Max('price', output_field=FloatField()) - Avg('price'))
-        pubs = Publisher.objects.annotate(num_books=Count('book'))
-        # serializer = BookSerializer(books, many=True)
-        return Response(pubs)
+        # pubs = Publisher.objects.annotate(num_books=Count('book'))
+        # queryset = Book.objects.annotate(author_count=Count('authors'))
+        # serializer = BookSerializer(queryset, many=True)
+        store = Store.objects.annotate(min_price=Min('books__price'), max_price=Max('books__price'))
+        serializer=StoreSerializer(store, many=True)
+        return Response(serializer.data)

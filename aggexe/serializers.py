@@ -13,6 +13,14 @@ class PublisherSerializer(serializers.ModelSerializer):
         fields = ('id', 'name')
 
 class BookSerializer(serializers.ModelSerializer):
+    author_count = serializers.IntegerField()
     class Meta:
         model = Book
-        fields = ('id', 'name', 'pages', 'price', 'authors', 'publisher')
+        fields = ('id', 'name', 'pages', 'price', 'author_count', 'publisher')
+
+class StoreSerializer(serializers.ModelSerializer):
+    min_price=serializers.IntegerField()
+    max_price=serializers.IntegerField()
+    class Meta:
+        model = Store
+        fields = ('id', 'name', 'books', 'max_price', 'min_price')
